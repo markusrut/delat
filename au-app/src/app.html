@@ -1,0 +1,45 @@
+<ion-app>
+    <ion-tabs>
+        <ion-tab tab="home">
+            <div>
+                <ion-header>
+                    <ion-toolbar>
+                      <ion-title>Kostnader</ion-title>
+                    </ion-toolbar>
+                </ion-header>
+                
+                <ion-content>
+                Contents
+                </ion-content>
+                  <ion-footer>
+                    <ion-toolbar>
+                      <ion-title>Footer</ion-title>
+                    </ion-toolbar>
+                    <new-collection-button></new-collection-button>
+                  </ion-footer>
+                
+            </div>
+        </ion-tab>
+        <ion-tab tab="transactions">
+            <h1>Transaktioner</h1>
+        </ion-tab>
+        <ion-tab tab="settings">
+            <h1>Profil</h1>
+        </ion-tab>
+  
+        <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="transactions">
+                <ion-label>Transaktioner</ion-label>
+                <ion-icon name="swap-horizontal-outline"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button tab="home">
+                <ion-label>Kostnader</ion-label>
+                <ion-icon name="cash-outline"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button tab="settings">
+                <ion-label>Profil</ion-label>
+                <ion-icon name="person-outline"></ion-icon>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-app>

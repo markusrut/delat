@@ -1,0 +1,5 @@
+:root {
+  --sl-color-primary-hue: 290;
+  --sl-color-primary-saturation: 40%;
+  --sl-color-primary-text: var(--sl-color-white);
+}
