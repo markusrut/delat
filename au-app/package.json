@@ -7,6 +7,16 @@
     "url": "???"
   },
   "license": "UNLICENSED",
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html",
+    "pretest": "npm run lint",
+    "start": "webpack-dev-server",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest"
+  },
   "dependencies": {
     "aurelia": "dev"
   },
@@ -37,16 +47,6 @@
     "jest-transform-stub": "^2.0.0",
     "@types/jest": "^26.0.14",
     "@aurelia/ts-jest": "dev"
-  },
-  "scripts": {
-    "lint:js": "eslint src test --ext .js,.ts",
-    "lint:html": "htmlhint -c .htmlhintrc src",
-    "lint": "npm run lint:js && npm run lint:html",
-    "pretest": "npm run lint",
-    "start": "webpack-dev-server",
-    "build": "rimraf dist && webpack --env production",
-    "analyze": "rimraf dist && webpack --env production --analyze",
-    "test": "jest"
   },
   "jest": {
     "transform": {
