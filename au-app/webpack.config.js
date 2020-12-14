@@ -16,7 +16,10 @@ const postcssLoader = {
   loader: 'postcss-loader',
   options: {
     postcssOptions: {
-      plugins: ['autoprefixer']
+      plugins: [
+        require('tailwindcss'),
+        'autoprefixer'
+      ]
     }
   }
 };

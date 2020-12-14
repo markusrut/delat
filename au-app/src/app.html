@@ -1,45 +1,41 @@
-<ion-app>
-    <ion-tabs>
-        <ion-tab tab="home">
-            <div>
-                <ion-header>
-                    <ion-toolbar>
-                      <ion-title>Kostnader</ion-title>
-                    </ion-toolbar>
-                </ion-header>
-                
-                <ion-content>
-                Contents
-                </ion-content>
-                  <ion-footer>
-                    <ion-toolbar>
-                      <ion-title>Footer</ion-title>
-                    </ion-toolbar>
-                    <new-collection-button></new-collection-button>
-                  </ion-footer>
-                
-            </div>
-        </ion-tab>
-        <ion-tab tab="transactions">
-            <h1>Transaktioner</h1>
-        </ion-tab>
-        <ion-tab tab="settings">
-            <h1>Profil</h1>
-        </ion-tab>
-  
-        <ion-tab-bar slot="bottom">
-            <ion-tab-button tab="transactions">
-                <ion-label>Transaktioner</ion-label>
-                <ion-icon name="swap-horizontal-outline"></ion-icon>
-            </ion-tab-button>
-            <ion-tab-button tab="home">
-                <ion-label>Kostnader</ion-label>
-                <ion-icon name="cash-outline"></ion-icon>
-            </ion-tab-button>
-            <ion-tab-button tab="settings">
-                <ion-label>Profil</ion-label>
-                <ion-icon name="person-outline"></ion-icon>
-            </ion-tab-button>
-        </ion-tab-bar>
-    </ion-tabs>
-</ion-app>
+<div class="content divide-y divide-gray-400">
+  <div class="content-header p-5">
+    <h1 class="text-xl text-center">Delat!</h1>
+  </div>
+  <div class="content-main p-5">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+        <p class="text-gray-700 text-base">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+        </p>
+      </div>
+      <div class="px-6 pt-4 pb-2">
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+      </div>
+    </div>
+  </div>
+  <div class="content-footer p-5">
+    <button class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Button
+    </button>
+  </div>
+</div>
+<footer class="app-footer">
+  <ul>
+    <li>
+      <i class="fa fa-exchange"></i>
+      Transaktioner
+    </li>
+    <li>
+      <i class="fa fa-money"></i>
+      Kostnader
+    </li>
+    <li>
+      <i class="fa fa-cog"></i>
+      Inställningar
+    </li>
+  </ul>
+</footer>
