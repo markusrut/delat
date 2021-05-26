@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+}
+
+nav {
+  flex: 1;
+  background: rgb(204, 56, 56);
+  display: flex;
+}
+
+a {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    background-color: darkgray;
+  }
+}
+
+.load-active {
+  background-color: lightgray;
+}

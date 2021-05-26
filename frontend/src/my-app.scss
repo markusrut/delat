@@ -1,0 +1,17 @@
+:host {
+  --footer-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+}
+
+.main-viewport {
+  overflow-y: auto;
+  height: calc(100% - var(--footer-height));
+  // flex: 1;
+}
+
+nav-footer {
+  height: var(--footer-height);
+}
