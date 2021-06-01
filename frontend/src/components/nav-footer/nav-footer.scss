@@ -15,11 +15,11 @@ a {
   justify-content: center;
   text-decoration: none;
   color: var(--color-primary);
- 
+
   & i {
-    transition: transform 500ms;
+    transition: transform 500ms, color 1s;
   }
-  
+
   &:hover i,
   &.load-active i {
     color: var(--color-primary-light);
