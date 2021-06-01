@@ -4,20 +4,25 @@
 
 nav {
   flex: 1;
-  background: rgb(204, 56, 56);
+  background: var(--color-primary-dark);
   display: flex;
 }
 
 a {
-  padding: 10px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  color: black;
-
-  &:hover {
-    background-color: darkgray;
+  color: var(--color-primary);
+ 
+  & i {
+    transition: transform 500ms;
   }
-}
-
-.load-active {
-  background-color: lightgray;
+  
+  &:hover i,
+  &.load-active i {
+    color: var(--color-primary-light);
+    transform: scale(1.5);
+  }
 }

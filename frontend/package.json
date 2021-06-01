@@ -8,6 +8,7 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "aurelia": "latest"
   },
   "devDependencies": {

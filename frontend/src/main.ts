@@ -5,11 +5,11 @@ import * as components from './components/components'
 // Css files imported in this main file are NOT processed by style-loader
 // They are for sharedStyles in shadowDOM.
 // However, css files imported in other js/ts files are processed by style-loader.
-import shared from './styles/shared.scss';
+import styles from './styles/styles.scss';
 
 const styleConfiguration = StyleConfiguration.shadowDOM({
   // optionally add the shared styles for all components
-  sharedStyles: [shared]
+  sharedStyles: [styles]
 });
 
 Aurelia
