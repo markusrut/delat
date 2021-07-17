@@ -7,6 +7,18 @@
     "url": "???"
   },
   "license": "UNLICENSED",
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
+    "pretest": "npm run lint",
+    "start": "webpack serve",
+    "serve": "webpack serve",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "aurelia": "latest"
@@ -41,17 +53,6 @@
     "jest-transform-stub": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@aurelia/ts-jest": "latest"
-  },
-  "scripts": {
-    "lint:js": "eslint src test --ext .js,.ts",
-    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
-    "lint:html": "htmlhint -c .htmlhintrc src",
-    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
-    "pretest": "npm run lint",
-    "start": "webpack serve",
-    "build": "rimraf dist && webpack --env production",
-    "analyze": "rimraf dist && webpack --env production --analyze",
-    "test": "jest"
   },
   "jest": {
     "transform": {

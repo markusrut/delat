@@ -1,0 +1,11 @@
+{
+  "aurelia.aureliaProject": {
+    "rootDirectory": "frontend"
+  },
+  "aurelia.relatedFiles": {
+    "script": [".js", ".ts"],
+    "style": [".less", ".sass", ".scss", ".styl", ".css"],
+    "unit": [".spec.js", ".spec.ts"],
+    "view": [".html"]
+  }
+}

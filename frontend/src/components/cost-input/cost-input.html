@@ -1,0 +1,6 @@
+<input ref="inputElement" type="number" value.bind="inputValue" />
+<button click.delegate="addInput()">Add</button>
+<ul>
+  <li repeat.for="transaction of transactions">${transaction.amount}</li>
+</ul>
+Sum: ${transactionSum}
