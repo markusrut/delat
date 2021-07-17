@@ -1,6 +1,15 @@
-<input ref="inputElement" type="number" value.bind="inputValue" />
-<button click.delegate="addInput()">Add</button>
-<ul>
-  <li repeat.for="transaction of transactions">${transaction.amount}</li>
-</ul>
-Sum: ${transactionSum}
+<div class="col">
+  <input ref="transactionInput" type="number" />
+  <button click.delegate="addTransaction()">Add transaction</button>
+  <ul>
+    <li repeat.for="transaction of transactions">${transaction.amount}</li>
+  </ul>
+  Sum: ${transactionSum}
+</div>
+<div class="col">
+  <input ref="userInput" />
+  <button click.delegate="addUser()">Add user</button>
+  <ul>
+    <li repeat.for="user of users">${user.name}</li>
+  </ul>
+</div>

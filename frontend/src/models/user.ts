@@ -1,3 +1,7 @@
 export default class User {
-  constructor(public name: string) {}
+  constructor(private _name: string) {}
+
+  get name() {
+    return this._name;
+  }
 }
