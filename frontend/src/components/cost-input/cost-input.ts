@@ -7,8 +7,25 @@ export class CostInput {
 
   transactions: Array<Transaction> = [];
   users: Array<User> = [];
+  participantsToShareSum: Array<User> = [];
 
-  bound() {
+  constructor() {
+    this.transactions = [
+      new Transaction(100),
+      new Transaction(200),
+      new Transaction(300),
+    ];
+
+    this.users = [
+      new User("Max"),
+      new User("John"),
+      new User("Tom"),
+      new User("Markus Rutström"),
+      new User("1 2 3"),
+    ];
+  }
+
+  attached() {
     this.addEventListeners();
   }
 
@@ -19,6 +36,20 @@ export class CostInput {
     });
 
     return sum;
+  }
+  public get transactionUnallocatedSum() {
+    let sum = 0;
+    this.getTransactionsWithoutParticipants().forEach((transaction) => {
+      sum += transaction.amount;
+    });
+
+    return sum;
+  }
+
+  public getTransactionsWithoutParticipants(): Array<Transaction> {
+    return this.transactions.filter(
+      (transaction) => transaction.participants.length === 0
+    );
   }
 
   addTransaction(): void {
@@ -35,6 +66,18 @@ export class CostInput {
     if (value === "") return;
     this.users.push(new User(value));
     this.userInput.value = "";
+  }
+
+  addRandomUserToTransaction(transaction: Transaction): void {
+    const randomUser =
+      this.users[Math.floor(Math.random() * this.users.length)];
+    transaction.addParticipant(randomUser);
+  }
+
+  addRandomUserToUnallocatedSum(): void {
+    const randomUser =
+      this.users[Math.floor(Math.random() * this.users.length)];
+    this.participantsToShareSum.push(randomUser);
   }
 
   private addEventListeners() {
