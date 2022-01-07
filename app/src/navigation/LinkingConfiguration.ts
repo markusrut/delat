@@ -1,19 +1,12 @@
-/**
- * Learn more about deep linking with React Navigation
- * https://reactnavigation.org/docs/deep-linking
- * https://reactnavigation.org/docs/configuring-links
- */
-
 import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
+import { RootStackParamList } from "./RootStack";
 
-import { RootStackParamList } from "./types";
-
-const linking: LinkingOptions<RootStackParamList> = {
+export const LinkingConfiguration: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Root: {
+      AppTabs: {
         screens: {
           TabOne: {
             screens: {
@@ -32,5 +25,3 @@ const linking: LinkingOptions<RootStackParamList> = {
     },
   },
 };
-
-export default linking;
