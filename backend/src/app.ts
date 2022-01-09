@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express"
+import cors from "cors"
 import { graphqlHTTP } from "express-graphql";
 import { buildSchema } from "graphql";
 
@@ -9,18 +10,24 @@ dotenv.config({
 
 var schema = buildSchema(`
   type Query {
-    hello: String
+    hello(name: String!): String
   }
 `);
 
-// The root provides a resolver function for each API endpoint
+
+type HelloRequestArgs = {
+  name: String
+}
+
 var root = {
-  hello: () => {
-    return "Hello Markus!";
+  hello: ({ name }: HelloRequestArgs) => {
+    return `Hello ${name}!`;
   },
 };
 
 var app = express();
+app.use(cors());
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -31,7 +38,6 @@ app.use(
 );
 
 const port = process.env.APP_PORT || 5000;
-
 app.listen(port, () => {
-  console.log(`Running GraphQL API at http://localhost:${port}/graphql`);
-});
+  console.log("Server started on port", port);
+})

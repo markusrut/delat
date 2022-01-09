@@ -27,10 +27,7 @@ const Navigation: FC<NavigationProps> = ({ colorScheme }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.clear();
     AsyncStorage.getItem("user", (error, userJson) => {
-      console.log("Navigation effect, got user: ", userJson);
-
       if (userJson) login(JSON.parse(userJson));
     });
 
