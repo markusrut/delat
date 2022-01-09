@@ -8,14 +8,14 @@ export const LinkingConfiguration: LinkingOptions<RootStackParamList> = {
     screens: {
       AppTabs: {
         screens: {
-          TabOne: {
+          Main: {
             screens: {
-              TabOneScreen: "one",
+              MainScreen: "Main",
             },
           },
-          TabTwo: {
+          Profile: {
             screens: {
-              TabTwoScreen: "two",
+              ProfileScreen: "Profile",
             },
           },
         },

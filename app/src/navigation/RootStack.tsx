@@ -6,6 +6,7 @@ import {
 import { FC } from "react";
 import ModalScreen from "../screens/ModalScreen";
 import { NotFoundScreen } from "../screens/NotFoundScreen";
+import { UserData } from "../types/UserData";
 import { AppTabs, AppTabsParamList } from "./AppTabs";
 
 export type RootStackParamList = {
@@ -20,9 +21,9 @@ export type RootStackNavProps<Screen extends keyof RootStackParamList> =
 
 const Root = createNativeStackNavigator<RootStackParamList>();
 
-type RootStackProps = {};
+type RootStackProps = { user: UserData };
 
-export const RootStack: FC<RootStackProps> = ({}) => {
+export const RootStack: FC<RootStackProps> = ({ user }) => {
   return (
     <Root.Navigator>
       <Root.Screen

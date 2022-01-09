@@ -1,21 +1,16 @@
+import { useContext } from "react";
 import { StyleSheet } from "react-native";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { AppTabsNavProps } from "../navigation/AppTabs";
+import { AuthContext } from "../providers/AuthProvider";
 
-export default function TabOneScreen({
-  navigation,
-}: AppTabsNavProps<"TabOne">) {
+export default function MainScreen({}: AppTabsNavProps<"Main">) {
+  const { user } = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab ew</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <Text style={styles.title}>Main</Text>
+      <Text>Welcome {user?.username} </Text>
     </View>
   );
 }
