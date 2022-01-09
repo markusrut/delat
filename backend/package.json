@@ -4,7 +4,7 @@
   "description": "Node JS backend with graphql API",
   "main": "src/app.js",
   "scripts": {
-    "start": "nodemon src/app.ts",
+    "start": "nodemon src/server.ts",
     "test": "test"
   },
   "repository": {
