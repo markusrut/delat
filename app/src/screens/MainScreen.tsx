@@ -8,12 +8,14 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export default function MainScreen({}: AppTabsNavProps<"Main">) {
   const { user } = useContext(AuthContext);
-  const [userRequest, setUserRequest] = useState("");
+  const [name, setName] = useState("");
   const [apiResponse, setApiResponse] = useState("");
 
   const callApi = async () => {
     const url = "http://192.168.1.74:4000/graphql";
-    const query = `{ hello(name: "${userRequest}") }`;
+    const query = `query Hello($name: String!) {
+      hello(name: $name)
+    }`;
 
     console.log("Calling api", url, query);
 
@@ -24,7 +26,10 @@ export default function MainScreen({}: AppTabsNavProps<"Main">) {
           "Content-Type": "application/json",
           Accept: "Application/json",
         },
-        body: JSON.stringify({ query: query }),
+        body: JSON.stringify({
+          query,
+          variables: { name },
+        }),
       });
 
       const data = await response.json();
@@ -43,8 +48,8 @@ export default function MainScreen({}: AppTabsNavProps<"Main">) {
       <Text>Welcome {user?.username} </Text>
       <TextInput
         style={styles.input}
-        value={userRequest}
-        onChangeText={(value) => setUserRequest(value)}
+        value={name}
+        onChangeText={(value) => setName(value)}
         placeholder="my placeholder text"
       ></TextInput>
       <Button title="Call API" onPress={callApi}></Button>
