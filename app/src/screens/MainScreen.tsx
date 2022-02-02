@@ -12,7 +12,7 @@ export default function MainScreen({}: AppTabsNavProps<"Main">) {
   const [apiResponse, setApiResponse] = useState("");
 
   const callApi = async () => {
-    const url = "http://192.168.1.74:4000/graphql";
+    const url = "http://localhost:4000/graphql";
     const query = `query Hello($name: String!) {
       hello(name: $name)
     }`;
