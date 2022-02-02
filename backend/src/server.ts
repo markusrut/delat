@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import express, { RequestHandler } from "express";
+import express from "express";
 import cors from "cors";
 import { graphqlHTTP } from "express-graphql";
 import { root, schema } from "./GraphQlExample";
@@ -8,14 +8,8 @@ dotenv.config({
   path: ".env",
 });
 
-const loggingMiddleware: RequestHandler = (req, res, next) => {
-  console.log(`Request from ${req.ip}, Response status code ${res.statusCode}`);
-  next();
-};
-
 var app = express();
 app.use(cors());
-app.use(loggingMiddleware);
 
 app.use(
   "/graphql",
