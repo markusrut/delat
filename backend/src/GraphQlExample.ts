@@ -1,4 +1,5 @@
 import { buildSchema } from "graphql";
+import { createPerson } from "./Neo4jExample";
 import { RandomDie } from "./RandomDie";
 
 const messageStorage = {
@@ -18,6 +19,9 @@ type GetDieArgs = {
 type SetMessageArgs = {
   message: string;
 };
+type SetUserArgs = {
+  name: string;
+};
 
 export const schema = buildSchema(`
   type RandomDie {
@@ -34,6 +38,7 @@ export const schema = buildSchema(`
     getMessage: String
   }
   type Mutation {
+    setUser(name: String!): String
     setMessage(message: String!): String!
   }
 `);
@@ -63,6 +68,13 @@ export const root = {
   },
   setMessage: (args: SetMessageArgs) => {
     messageStorage.message = args.message;
+    return messageStorage.message;
+  },
+  setUser: async (args: SetUserArgs) => {
+    console.log("running setUser", args);
+
+    messageStorage.message = args.name;
+    await createPerson(args.name);
     return messageStorage.message;
   },
 };
