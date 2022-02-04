@@ -1,0 +1,17 @@
+type RandomDie {
+  numOfSides: Int!
+  rollOnce: Int!
+  roll(numOfRolls: Int!): [Int]
+}
+type Query {
+  hello(name: String!): String
+  quoteOfTheDay: String
+  random: Float!
+  rollDice(numOfDice: Int!, numSides: Int): [Int]
+  getDie(numOfSides: Int): RandomDie
+  getMessage: String
+}
+type Mutation {
+  setUser(name: String!): String
+  setMessage(message: String!): String!
+}

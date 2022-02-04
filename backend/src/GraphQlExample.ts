@@ -43,8 +43,8 @@ export const schema = buildSchema(`
   }
 `);
 
-export const root = {
-  hello: (args: HelloRequestArgs) => {
+export const resolvers = {
+  hello(args: HelloRequestArgs) {
     return `Hello ${args.name}!`;
   },
   quoteOfTheDay: () => {
