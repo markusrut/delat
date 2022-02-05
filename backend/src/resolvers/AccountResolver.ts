@@ -27,6 +27,9 @@ export class AccountResolver {
     @Arg("password") password: string
   ) {
     try {
+      const existingAccount = await Accounts.findOne({ where: { email } });
+      if (existingAccount) throw Error("Account already exists");
+
       await Accounts.createOne({
         email,
         password,
@@ -34,7 +37,7 @@ export class AccountResolver {
       return true;
     } catch (error) {
       console.log(error);
-      return false;
+      throw error;
     }
   }
 }
