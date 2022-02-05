@@ -1,7 +1,12 @@
 import { graphqlHTTP } from "express-graphql";
-import { resolvers, schema } from "../examples/GraphQlExample";
+import { buildSchema } from "type-graphql";
+import { AccountResolver } from "../resolvers/AccountResolver";
 
-export default graphqlHTTP({
-  schema: schema,
-  rootValue: resolvers,
-});
+export default graphqlHTTP(async () => ({
+  schema: await buildSchema({
+    resolvers: [AccountResolver],
+  }),
+  graphiql: {
+    headerEditorEnabled: true,
+  },
+}));

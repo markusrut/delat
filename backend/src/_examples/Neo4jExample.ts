@@ -1,4 +1,4 @@
-import Users from "./Models/Users";
+import Users from "./entities/Users";
 
 export const createPerson = async (name: string) => {
   const userWithOrder = await Users.createOne({

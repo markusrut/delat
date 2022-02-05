@@ -1,5 +1,5 @@
 import { ModelRelatedNodesI, NeogmaInstance, ModelFactory } from "neogma";
-import neoInstance from "../repository/neogma";
+import neoInstance from "../../repository/neogma";
 import Orders, { OrdersInstance } from "./Orders";
 
 // https://themetalfleece.github.io/neogma-docs/docs/Models/Defining-a-Model

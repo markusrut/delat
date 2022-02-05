@@ -14,7 +14,7 @@ export function addRoutes() {
   router.use("/playground", expressPlayground({ endpoint: "/graphql" }));
 
   router.use("/me", authMiddleware(), me);
-  router.use("/graphql", authMiddleware(), graphql);
+  router.use("/graphql", graphql);
 
   return router;
 }
