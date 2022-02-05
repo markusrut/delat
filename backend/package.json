@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Node JS backend with graphql API",
-  "main": "src/app.js",
+  "main": "src/server.ts",
   "scripts": {
     "start": "nodemon src/server.ts",
     "debug": "nodemon --inspect src/server.ts",
