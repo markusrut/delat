@@ -1,5 +1,5 @@
 import { NeogmaInstance, ModelFactory } from "neogma";
-import neoInstance from "../neogma";
+import neoInstance from "../repository/neogma";
 
 type OrderPropertiesI = {
   name: string;
