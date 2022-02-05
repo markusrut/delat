@@ -18,10 +18,7 @@ class Account {
 export class AccountResolver {
   @Query(() => [Account])
   async accounts(): Promise<Account[]> {
-    const accounts = await Accounts.findMany();
-    return accounts.map((account: AccountsInstance) => ({
-      email: account.email,
-    }));
+    return await Accounts.findMany();
   }
 
   @Mutation(() => Boolean)

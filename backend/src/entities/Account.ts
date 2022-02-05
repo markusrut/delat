@@ -1,8 +1,6 @@
 import { NeogmaInstance, ModelFactory } from "neogma";
 import neoInstance from "../repository/neogma";
 
-// https://themetalfleece.github.io/neogma-docs/docs/Models/Defining-a-Model
-
 type AccountPropertiesI = {
   email: string;
   password: string;
@@ -28,7 +26,7 @@ const Accounts = ModelFactory<
     schema: {
       email: {
         type: "string",
-        minLength: 3,
+        format: "email",
         required: true,
       },
       password: {
