@@ -22,13 +22,13 @@ declare global {
 type NavigationProps = { colorScheme: ColorSchemeName };
 
 const Navigation: FC<NavigationProps> = ({ colorScheme }) => {
-  const { user, login } = useContext(AuthContext);
+  const { user, setToken } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem("user", (error, userJson) => {
-      if (userJson) login(JSON.parse(userJson));
+    AsyncStorage.getItem("sessionToken", (error, sessionToken) => {
+      if (sessionToken) setToken(sessionToken);
     });
 
     setTimeout(() => {

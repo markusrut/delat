@@ -45,7 +45,7 @@ export default function MainScreen({}: AppTabsNavProps<"Main">) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Main</Text>
-      <Text>Welcome {user?.username} </Text>
+      <Text>Welcome {user?.name} </Text>
       <TextInput
         style={styles.input}
         value={name}

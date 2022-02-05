@@ -32,7 +32,7 @@ class LoginResponse {
 @Resolver()
 export class AccountResolver {
   @Query(() => [Account])
-  @Authorized()
+  // @Authorized()
   async accounts(): Promise<Account[]> {
     return await Accounts.findMany();
   }
