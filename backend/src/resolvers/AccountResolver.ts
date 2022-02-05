@@ -15,6 +15,18 @@ import { getSessionToken } from "../authentication/authTokens";
 class Account {
   @Field()
   email!: string;
+
+  @Field({ nullable: true })
+  name?: string;
+}
+
+@ObjectType()
+class LoginResponse {
+  @Field(() => Account)
+  account!: Account;
+
+  @Field()
+  sessionToken!: string;
 }
 
 @Resolver()
@@ -25,21 +37,28 @@ export class AccountResolver {
     return await Accounts.findMany();
   }
 
-  @Mutation(() => String)
-  async login(@Arg("email") email: string, @Arg("password") password: string) {
+  @Mutation(() => LoginResponse)
+  async login(
+    @Arg("email") email: string,
+    @Arg("password") password: string
+  ): Promise<LoginResponse> {
     const account = await Accounts.findOne({ where: { email } });
     if (!account) throw new Error("Account not found");
 
     const valid = await compare(password, account.password);
     if (!valid) throw new Error("Invalid password");
 
-    return getSessionToken(account.email);
+    return {
+      account,
+      sessionToken: getSessionToken(account.email),
+    };
   }
 
   @Mutation(() => String)
   async register(
     @Arg("email") email: string,
-    @Arg("password") password: string
+    @Arg("password") password: string,
+    @Arg("password") name: string
   ) {
     const existingAccount = await Accounts.findOne({ where: { email } });
     if (existingAccount) throw Error("Account already exists");
@@ -48,6 +67,7 @@ export class AccountResolver {
     const createdAccount = await Accounts.createOne({
       email,
       password: hashedPassword,
+      name,
     });
 
     return "Account created";

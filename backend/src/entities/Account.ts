@@ -4,6 +4,7 @@ import neoInstance from "../repository/neogma";
 type AccountPropertiesI = {
   email: string;
   password: string;
+  name: string;
 };
 interface AccountsRelatedNodesI {}
 interface MethodsI {}
@@ -32,6 +33,10 @@ const Accounts = ModelFactory<
       password: {
         type: "string",
         minLength: 3,
+        required: true,
+      },
+      name: {
+        type: "string",
         required: true,
       },
     },
