@@ -29,6 +29,15 @@ class LoginResponse {
   sessionToken!: string;
 }
 
+@ObjectType()
+class RegisterResponse {
+  @Field(() => Account)
+  account!: Account;
+
+  @Field()
+  sessionToken!: string;
+}
+
 @Resolver()
 export class AccountResolver {
   @Query(() => [Account])
@@ -54,22 +63,25 @@ export class AccountResolver {
     };
   }
 
-  @Mutation(() => String)
+  @Mutation(() => RegisterResponse)
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Arg("password") name: string
-  ) {
+    @Arg("name") name: string
+  ): Promise<RegisterResponse> {
     const existingAccount = await Accounts.findOne({ where: { email } });
     if (existingAccount) throw Error("Account already exists");
 
     const hashedPassword = await hash(password, 12);
-    const createdAccount = await Accounts.createOne({
+    const account = await Accounts.createOne({
       email,
       password: hashedPassword,
       name,
     });
 
-    return "Account created";
+    return {
+      account,
+      sessionToken: getSessionToken(account.email),
+    };
   }
 }

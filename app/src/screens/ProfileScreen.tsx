@@ -4,7 +4,7 @@ import { Text, View } from "../components/Themed";
 import { AuthContext } from "../providers/AuthProvider";
 
 export default function ProfileScreen() {
-  const { logout } = useContext(AuthContext);
+  const { setLoggedOut: logout } = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>

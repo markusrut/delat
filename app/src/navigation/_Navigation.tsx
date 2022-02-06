@@ -22,13 +22,13 @@ declare global {
 type NavigationProps = { colorScheme: ColorSchemeName };
 
 const Navigation: FC<NavigationProps> = ({ colorScheme }) => {
-  const { user, setToken } = useContext(AuthContext);
+  const { user, setLoggedIn: login } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem("sessionToken", (error, sessionToken) => {
-      if (sessionToken) setToken(sessionToken);
+      // if (sessionToken) setToken(sessionToken);
     });
 
     setTimeout(() => {
@@ -49,13 +49,6 @@ const Navigation: FC<NavigationProps> = ({ colorScheme }) => {
         <RootStack user={user} />
       ) : (
         <AuthStack />
-        // <Center>
-        //   <Text>No user</Text>
-        //   <Button
-        //     title="Login"
-        //     onPress={() => login({ username: "Markus" })}
-        //   ></Button>
-        // </Center>
       )}
     </NavigationContainer>
   );
