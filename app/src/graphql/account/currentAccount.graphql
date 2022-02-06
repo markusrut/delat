@@ -1,0 +1,6 @@
+query CurrentAccount {
+  me {
+    email
+    name
+  }
+}

@@ -1,14 +1,17 @@
 import { AuthChecker } from "type-graphql";
 import { ContextType } from "../routes/graphql";
-import { fetchSessionToken, validateSessionToken } from "./authTokens";
+import {
+  fetchAccessToken as fetchAccessToken,
+  validateAccessToken as validateAccessToken,
+} from "./authTokens";
 
 export const customAuthChecker: AuthChecker<ContextType> = (
   { root, args, context, info },
   roles
 ) => {
   try {
-    const token = fetchSessionToken(context.req);
-    const tokenPayload = validateSessionToken(token);
+    const token = fetchAccessToken(context.req);
+    const tokenPayload = validateAccessToken(token);
     return tokenPayload ? true : false;
   } catch (error) {
     console.log("customAuthChecker error", error);

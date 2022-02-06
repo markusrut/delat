@@ -11,11 +11,10 @@ import {
 import Accounts from "../entities/Account";
 import { hash, compare } from "bcryptjs";
 import {
-  createSessionToken,
-  fetchSessionToken,
-  validateSessionToken,
+  createAccessToken,
+  fetchAccessToken,
+  validateAccessToken,
 } from "../authentication/authTokens";
-import { Request } from "express";
 import { ContextType } from "../routes/graphql";
 
 @ObjectType()
@@ -33,7 +32,7 @@ class LoginResponse {
   account!: Account;
 
   @Field()
-  sessionToken!: string;
+  accessToken!: string;
 }
 
 @ObjectType()
@@ -42,7 +41,7 @@ class RegisterResponse {
   account!: Account;
 
   @Field()
-  sessionToken!: string;
+  accessToken!: string;
 }
 
 @Resolver()
@@ -56,8 +55,8 @@ export class AccountResolver {
   @Query(() => Account)
   @Authorized()
   async me(@Ctx() { req }: ContextType): Promise<Account> {
-    const token = await fetchSessionToken(req);
-    const tokenPayload = await validateSessionToken(token);
+    const token = await fetchAccessToken(req);
+    const tokenPayload = await validateAccessToken(token);
 
     const account = await Accounts.findOne({
       where: { email: tokenPayload.email },
@@ -80,7 +79,7 @@ export class AccountResolver {
 
     return {
       account,
-      sessionToken: createSessionToken(account.email),
+      accessToken: createAccessToken(account.email),
     };
   }
 
@@ -102,7 +101,7 @@ export class AccountResolver {
 
     return {
       account,
-      sessionToken: createSessionToken(account.email),
+      accessToken: createAccessToken(account.email),
     };
   }
 }

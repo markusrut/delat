@@ -4,6 +4,6 @@ mutation Register($email: String!, $password: String!, $name: String!) {
       email
       name
     }
-    sessionToken
+    accessToken
   }
 }

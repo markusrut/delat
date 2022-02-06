@@ -4,16 +4,11 @@ import useCachedResources from "./src/hooks/useCachedResources";
 import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/navigation/_Navigation";
 import { AuthProvider } from "./src/providers/AuthProvider";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from "./src/providers/ApolloProvider";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
-  const client = new ApolloClient({
-    uri: "http://localhost:4000/graphql",
-    cache: new InMemoryCache(),
-  });
 
   if (!isLoadingComplete) {
     return null;
@@ -21,7 +16,7 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <AuthProvider>
-          <ApolloProvider client={client}>
+          <ApolloProvider>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />
           </ApolloProvider>

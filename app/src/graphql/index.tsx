@@ -23,8 +23,8 @@ export type Account = {
 
 export type LoginResponse = {
   __typename?: 'LoginResponse';
+  accessToken: Scalars['String'];
   account: Account;
-  sessionToken: Scalars['String'];
 };
 
 export type Mutation = {
@@ -49,13 +49,19 @@ export type MutationRegisterArgs = {
 export type Query = {
   __typename?: 'Query';
   accounts: Array<Account>;
+  me: Account;
 };
 
 export type RegisterResponse = {
   __typename?: 'RegisterResponse';
+  accessToken: Scalars['String'];
   account: Account;
-  sessionToken: Scalars['String'];
 };
+
+export type CurrentAccountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrentAccountQuery = { __typename?: 'Query', me: { __typename?: 'Account', email: string, name?: string | null } };
 
 export type ListAccountsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -68,7 +74,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', sessionToken: string, account: { __typename?: 'Account', email: string, name?: string | null } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, account: { __typename?: 'Account', email: string, name?: string | null } } };
 
 export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
@@ -77,9 +83,44 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'RegisterResponse', sessionToken: string, account: { __typename?: 'Account', email: string, name?: string | null } } };
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'RegisterResponse', accessToken: string, account: { __typename?: 'Account', email: string, name?: string | null } } };
 
 
+export const CurrentAccountDocument = gql`
+    query CurrentAccount {
+  me {
+    email
+    name
+  }
+}
+    `;
+
+/**
+ * __useCurrentAccountQuery__
+ *
+ * To run a query within a React component, call `useCurrentAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentAccountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentAccountQuery(baseOptions?: Apollo.QueryHookOptions<CurrentAccountQuery, CurrentAccountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CurrentAccountQuery, CurrentAccountQueryVariables>(CurrentAccountDocument, options);
+      }
+export function useCurrentAccountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentAccountQuery, CurrentAccountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CurrentAccountQuery, CurrentAccountQueryVariables>(CurrentAccountDocument, options);
+        }
+export type CurrentAccountQueryHookResult = ReturnType<typeof useCurrentAccountQuery>;
+export type CurrentAccountLazyQueryHookResult = ReturnType<typeof useCurrentAccountLazyQuery>;
+export type CurrentAccountQueryResult = Apollo.QueryResult<CurrentAccountQuery, CurrentAccountQueryVariables>;
 export const ListAccountsDocument = gql`
     query ListAccounts {
   accounts {
@@ -122,7 +163,7 @@ export const LoginDocument = gql`
       email
       name
     }
-    sessionToken
+    accessToken
   }
 }
     `;
@@ -160,7 +201,7 @@ export const RegisterDocument = gql`
       email
       name
     }
-    sessionToken
+    accessToken
   }
 }
     `;

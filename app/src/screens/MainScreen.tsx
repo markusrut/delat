@@ -1,25 +1,19 @@
-import { gql, useQuery } from "@apollo/client";
-import React, { useContext, useState } from "react";
-import { Button, StyleSheet, TextInput } from "react-native";
+import React, { FC } from "react";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import { Text, View } from "../components/Themed";
-import { useListAccountsQuery } from "../graphql";
+import { Text } from "../components/Themed";
+import { useCurrentAccountQuery, useListAccountsQuery } from "../graphql";
 import { AppTabsNavProps } from "../navigation/AppTabs";
-import { AuthContext } from "../providers/AuthProvider";
 
 export default function MainScreen({}: AppTabsNavProps<"Main">) {
-  const { user } = useContext(AuthContext);
-
   const { loading, error, data } = useListAccountsQuery();
 
   if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error :</Text>;
+  if (error) return <Text>Error :{error}</Text>;
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Main</Text>
-      <Text>Welcome {user?.name} </Text>
+      <CurrentAccount />
       {data?.accounts.map((account) => (
         <Text key={account.email}>
           {account.name} {account.email}
@@ -28,6 +22,16 @@ export default function MainScreen({}: AppTabsNavProps<"Main">) {
     </SafeAreaView>
   );
 }
+
+export const CurrentAccount: FC = () => {
+  const { loading, error, data } = useCurrentAccountQuery();
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :{JSON.stringify(error)}</Text>;
+  return (
+    <Text style={styles.title}>Welcome {data?.me.name || data?.me.email} </Text>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

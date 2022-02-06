@@ -4,7 +4,7 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 import React, { FC, useContext, useEffect, useState } from "react";
-import { ColorSchemeName, Text, Button } from "react-native";
+import { ColorSchemeName } from "react-native";
 import { AuthContext } from "../providers/AuthProvider";
 import { LinkingConfiguration } from "./LinkingConfiguration";
 import { RootStack, RootStackParamList } from "./RootStack";
@@ -22,18 +22,19 @@ declare global {
 type NavigationProps = { colorScheme: ColorSchemeName };
 
 const Navigation: FC<NavigationProps> = ({ colorScheme }) => {
-  const { user, setLoggedIn: login } = useContext(AuthContext);
+  const { accessToken, setLoggedIn } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem("sessionToken", (error, sessionToken) => {
-      // if (sessionToken) setToken(sessionToken);
-    });
-
-    setTimeout(() => {
+    const loadAccessToken = async () => {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      if (accessToken) {
+        setLoggedIn(accessToken);
+      }
       setLoading(false);
-    }, 1000);
+    };
+    accessToken === null ? loadAccessToken() : setLoading(false);
   }, []);
 
   return (
@@ -45,8 +46,8 @@ const Navigation: FC<NavigationProps> = ({ colorScheme }) => {
         <Center>
           <Loading />
         </Center>
-      ) : user ? (
-        <RootStack user={user} />
+      ) : accessToken ? (
+        <RootStack />
       ) : (
         <AuthStack />
       )}

@@ -5,7 +5,7 @@ export type SessionPayload = {
   email: string;
 };
 
-export const fetchSessionToken = (req: Request): string => {
+export const fetchAccessToken = (req: Request): string => {
   const [tokenType, token] = req.headers.authorization?.split(" ") ?? [];
   if (tokenType !== "Bearer") throw new Error("Invalid token type");
   if (!token) throw new Error("No token");
@@ -13,9 +13,9 @@ export const fetchSessionToken = (req: Request): string => {
   return token;
 };
 
-export const createSessionToken = (email: string) => {
-  const secret = process.env.JWT_SESSION_SECRET;
-  if (!secret) throw Error("Missing JWT secret");
+export const createAccessToken = (email: string) => {
+  const secret = process.env.JWT_ACCESS_SECRET;
+  if (!secret) throw Error("Missing access token secret");
 
   const payload: SessionPayload = {
     email,
@@ -26,9 +26,9 @@ export const createSessionToken = (email: string) => {
   });
 };
 
-export const validateSessionToken = (token: string): SessionPayload => {
-  const secret = process.env.JWT_SESSION_SECRET;
-  if (!secret) throw Error("Missing JWT secret");
+export const validateAccessToken = (token: string): SessionPayload => {
+  const secret = process.env.JWT_ACCESS_SECRET;
+  if (!secret) throw Error("Missing access token secret");
 
   try {
     const decoded = jwt.verify(token, secret);

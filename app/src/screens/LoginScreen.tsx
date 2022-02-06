@@ -14,12 +14,8 @@ export const LoginScreen: FC<AuthStackNavProps<"Login">> = ({ navigation }) => {
   const login = async () => {
     const response = await loginRequest({ variables: { email, password } });
     if (response.data?.login) {
-      const account = response.data.login.account;
-      const sessionToken = response.data.login.sessionToken;
-      setLoggedIn({
-        user: { name: account.name ?? account.email },
-        sessionToken,
-      });
+      const accessToken = response.data.login.accessToken;
+      setLoggedIn(accessToken);
     }
   };
 

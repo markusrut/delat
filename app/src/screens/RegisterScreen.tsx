@@ -19,12 +19,8 @@ export const RegisterScreen: FC<AuthStackNavProps<"Register">> = ({
       variables: { name, email, password },
     });
     if (response.data?.register) {
-      const account = response.data.register.account;
-      const sessionToken = response.data.register.sessionToken;
-      setLoggedIn({
-        user: { name: account.name ?? account.email },
-        sessionToken,
-      });
+      const accessToken = response.data.register.accessToken;
+      setLoggedIn(accessToken);
     }
   };
 
