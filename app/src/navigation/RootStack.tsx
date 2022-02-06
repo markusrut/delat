@@ -4,8 +4,8 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { FC } from "react";
-import ModalScreen from "../screens/ModalScreen";
-import { NotFoundScreen } from "../screens/NotFoundScreen";
+import ModalScreen from "../pages/ModalScreen";
+import { NotFoundScreen } from "../pages/NotFoundScreen";
 import { AppTabs, AppTabsParamList } from "./AppTabs";
 
 export type RootStackParamList = {

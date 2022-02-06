@@ -1,11 +1,12 @@
 import React, { FC, useContext } from "react";
-import { Button, Text, TextInput } from "react-native";
-import { Center } from "../components/Center";
+import { Button, TextInput, Text } from "react-native";
 import { useLoginMutation } from "../graphql";
-import { AuthStackNavProps } from "../navigation/AuthStack";
 import { AuthContext } from "../providers/AuthProvider";
+import { Center } from "./Center";
 
-export const LoginScreen: FC<AuthStackNavProps<"Login">> = ({ navigation }) => {
+type LoginFormProps = {};
+
+export const LoginForm: FC<LoginFormProps> = ({}) => {
   const { setLoggedIn } = useContext(AuthContext);
   const [loginRequest, loginResult] = useLoginMutation();
   const [email, setEmail] = React.useState("");
@@ -34,10 +35,8 @@ export const LoginScreen: FC<AuthStackNavProps<"Login">> = ({ navigation }) => {
       </Center>
     );
   }
-
   return (
-    <Center>
-      <Text>I am a login screen</Text>
+    <>
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -54,12 +53,6 @@ export const LoginScreen: FC<AuthStackNavProps<"Login">> = ({ navigation }) => {
         secureTextEntry
       />
       <Button title="Login" onPress={login} />
-      <Button
-        title="go to register"
-        onPress={() => {
-          navigation.navigate("Register");
-        }}
-      />
-    </Center>
+    </>
   );
 };

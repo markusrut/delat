@@ -3,8 +3,8 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { FC } from "react";
-import { LoginScreen } from "../screens/LoginScreen";
-import { RegisterScreen } from "../screens/RegisterScreen";
+import { LoginScreen } from "../pages/LoginScreen";
+import { RegisterScreen } from "../pages/RegisterScreen";
 
 type AuthStackProps = {};
 

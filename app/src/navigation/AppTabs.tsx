@@ -7,8 +7,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FC } from "react";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import MainScreen from "../screens/MainScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import MainScreen from "../pages/MainScreen";
+import ProfileScreen from "../pages/ProfileScreen";
 import { RootStackParamList } from "./RootStack";
 import { TabBarIcon } from "../components/TabBarIcon";
 
