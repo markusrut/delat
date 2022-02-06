@@ -1,6 +1,7 @@
 import {
   Arg,
   Authorized,
+  Ctx,
   Field,
   Mutation,
   ObjectType,
@@ -9,7 +10,13 @@ import {
 } from "type-graphql";
 import Accounts from "../entities/Account";
 import { hash, compare } from "bcryptjs";
-import { getSessionToken } from "../authentication/authTokens";
+import {
+  createSessionToken,
+  fetchSessionToken,
+  validateSessionToken,
+} from "../authentication/authTokens";
+import { Request } from "express";
+import { ContextType } from "../routes/graphql";
 
 @ObjectType()
 class Account {
@@ -46,6 +53,20 @@ export class AccountResolver {
     return await Accounts.findMany();
   }
 
+  @Query(() => Account)
+  @Authorized()
+  async me(@Ctx() { req }: ContextType): Promise<Account> {
+    const token = await fetchSessionToken(req);
+    const tokenPayload = await validateSessionToken(token);
+
+    const account = await Accounts.findOne({
+      where: { email: tokenPayload.email },
+    });
+    if (!account) throw new Error("Account not found");
+
+    return account;
+  }
+
   @Mutation(() => LoginResponse)
   async login(
     @Arg("email") email: string,
@@ -59,7 +80,7 @@ export class AccountResolver {
 
     return {
       account,
-      sessionToken: getSessionToken(account.email),
+      sessionToken: createSessionToken(account.email),
     };
   }
 
@@ -81,7 +102,7 @@ export class AccountResolver {
 
     return {
       account,
-      sessionToken: getSessionToken(account.email),
+      sessionToken: createSessionToken(account.email),
     };
   }
 }

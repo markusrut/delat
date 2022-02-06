@@ -1,10 +1,19 @@
+import { Request } from "express";
 import jwt from "jsonwebtoken";
 
 export type SessionPayload = {
   email: string;
 };
 
-export const getSessionToken = (email: string) => {
+export const fetchSessionToken = (req: Request): string => {
+  const [tokenType, token] = req.headers.authorization?.split(" ") ?? [];
+  if (tokenType !== "Bearer") throw new Error("Invalid token type");
+  if (!token) throw new Error("No token");
+
+  return token;
+};
+
+export const createSessionToken = (email: string) => {
   const secret = process.env.JWT_SESSION_SECRET;
   if (!secret) throw Error("Missing JWT secret");
 
@@ -33,7 +42,7 @@ export type RefreshPayload = {
   email: string;
 };
 
-export const getRefreshToken = (email: string) => {
+export const createRefreshToken = (email: string) => {
   const secret = process.env.JWT_REFRESH_SECRET;
   if (!secret) throw Error("Missing JWT secret");
 
