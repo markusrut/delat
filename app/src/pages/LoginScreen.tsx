@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { StyleSheet, Button, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Center } from "../components/Center";
 import { AuthStackNavProps } from "../navigation/AuthStack";
 import { LoginForm } from "../components/LoginForm";
-import { View } from "../components/Themed";
+import { Button, View } from "../components/Themed";
 
 export const LoginScreen: FC<AuthStackNavProps<"Login">> = ({ navigation }) => {
   return (
@@ -11,7 +11,7 @@ export const LoginScreen: FC<AuthStackNavProps<"Login">> = ({ navigation }) => {
       <Text>I am a login screen</Text>
       <LoginForm />
       <Button
-        title="go to register"
+        title="Sign up"
         onPress={() => {
           navigation.navigate("Register");
         }}
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     padding: 40,
+    marginBottom: 40,
   },
 });

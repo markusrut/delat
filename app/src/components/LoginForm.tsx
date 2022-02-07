@@ -1,8 +1,9 @@
 import React, { FC, useContext } from "react";
-import { Button, TextInput, Text } from "react-native";
+import { Button, Text, StyleSheet, Pressable } from "react-native";
 import { useLoginMutation } from "../graphql";
 import { AuthContext } from "../providers/AuthProvider";
 import { Center } from "./Center";
+import { CustomButton, Spacer, TextInput, View } from "./Themed";
 
 type LoginFormProps = {};
 
@@ -36,7 +37,7 @@ export const LoginForm: FC<LoginFormProps> = ({}) => {
     );
   }
   return (
-    <>
+    <View>
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -52,7 +53,8 @@ export const LoginForm: FC<LoginFormProps> = ({}) => {
         autoCorrect={false}
         secureTextEntry
       />
-      <Button title="Login" onPress={login} />
-    </>
+      <Spacer height={20} />
+      <CustomButton onPress={login}>Login</CustomButton>
+    </View>
   );
 };
