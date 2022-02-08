@@ -37,7 +37,7 @@ export const LoginForm: FC<LoginFormProps> = ({}) => {
     );
   }
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -58,3 +58,11 @@ export const LoginForm: FC<LoginFormProps> = ({}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+  },
+});

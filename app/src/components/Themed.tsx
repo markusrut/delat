@@ -41,6 +41,20 @@ export function Text(props: TextProps) {
   return <DefaultText style={[{ color }, style]} {...otherProps} />;
 }
 
+export type HeaderProps = ThemeProps & DefaultText["props"];
+export function Header(props: HeaderProps) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+
+  const defaultStyle: StyleProp<TextStyle> = {
+    color: useThemeColor({ light: lightColor, dark: darkColor }, "headerText"),
+    fontSize: 40,
+    fontWeight: "bold",
+    fontVariant: ["small-caps"],
+  };
+
+  return <DefaultText style={[defaultStyle, style]} {...otherProps} />;
+}
+
 export type TextInputProps = ThemeProps & DefaultTextInput["props"];
 export function TextInput(props: TextInputProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
