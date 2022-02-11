@@ -1,27 +1,30 @@
 import React, { FC, useContext } from "react";
 import { Text, StyleSheet } from "react-native";
-import { useLoginMutation } from "../graphql";
+import { useRegisterMutation } from "../graphql";
 import { AuthContext } from "../providers/AuthProvider";
 import { Center } from "./Center";
 import { CustomButton, Spacer, TextInput, View } from "./Themed";
 
-type LoginFormProps = {};
+type RegisterFormProps = {};
 
-export const LoginForm: FC<LoginFormProps> = ({}) => {
+export const RegisterForm: FC<RegisterFormProps> = ({}) => {
   const { setLoggedIn } = useContext(AuthContext);
-  const [loginRequest, loginResult] = useLoginMutation();
+  const [registerMutation, registerResult] = useRegisterMutation();
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const login = async () => {
-    const response = await loginRequest({ variables: { email, password } });
-    if (response.data?.login) {
-      const accessToken = response.data.login.accessToken;
+  const register = async () => {
+    const response = await registerMutation({
+      variables: { name, email, password },
+    });
+    if (response.data?.register) {
+      const accessToken = response.data.register.accessToken;
       setLoggedIn(accessToken);
     }
   };
 
-  if (loginResult.loading) {
+  if (registerResult.loading) {
     return (
       <Center>
         <Text>Loading...</Text>
@@ -29,15 +32,24 @@ export const LoginForm: FC<LoginFormProps> = ({}) => {
     );
   }
 
-  if (loginResult.error) {
+  if (registerResult.error) {
     return (
       <Center>
-        <Text>Error: {loginResult.error.message}</Text>
+        <Text>Error: {registerResult.error.message}</Text>
       </Center>
     );
   }
+
   return (
     <View style={styles.container}>
+      <Text>asd</Text>
+      <TextInput
+        value={name}
+        onChangeText={setName}
+        placeholder="Name"
+        autoCapitalize="words"
+        autoCorrect={false}
+      />
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -54,7 +66,7 @@ export const LoginForm: FC<LoginFormProps> = ({}) => {
         secureTextEntry
       />
       <Spacer height={20} />
-      <CustomButton onPress={login}>Login</CustomButton>
+      <CustomButton onPress={register}>Register</CustomButton>
     </View>
   );
 };

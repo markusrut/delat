@@ -1,77 +1,34 @@
-import React, { FC, useContext } from "react";
-import { Button, Text, TextInput } from "react-native";
-import { Center } from "../components/Center";
-import { useRegisterMutation } from "../graphql";
+import React, { FC } from "react";
+import { StyleSheet } from "react-native";
+import { RegisterForm } from "../components/RegisterForm";
+import { Button, Header, View, Text } from "../components/Themed";
 import { AuthStackNavProps } from "../navigation/AuthStack";
-import { AuthContext } from "../providers/AuthProvider";
 
 export const RegisterScreen: FC<AuthStackNavProps<"Register">> = ({
   navigation,
 }) => {
-  const { setLoggedIn } = useContext(AuthContext);
-  const [registerMutation, registerResult] = useRegisterMutation();
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  const register = async () => {
-    const response = await registerMutation({
-      variables: { name, email, password },
-    });
-    if (response.data?.register) {
-      const accessToken = response.data.register.accessToken;
-      setLoggedIn(accessToken);
-    }
-  };
-
-  if (registerResult.loading) {
-    return (
-      <Center>
-        <Text>Loading...</Text>
-      </Center>
-    );
-  }
-
-  if (registerResult.error) {
-    return (
-      <Center>
-        <Text>Error: {registerResult.error.message}</Text>
-      </Center>
-    );
-  }
-
   return (
-    <Center>
-      <Text>I am a register screen</Text>
-      <TextInput
-        value={name}
-        onChangeText={setName}
-        placeholder="Name"
-        autoCapitalize="words"
-        autoCorrect={false}
-      />
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Email"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Password"
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry
-      />
-      <Button title="Register" onPress={register} />
+    <View style={styles.container}>
+      <Header>Register</Header>
+      <RegisterForm />
+      <Text>Already have an account??</Text>
       <Button
-        title="go to login"
+        title="Login"
         onPress={() => {
           navigation.navigate("Login");
         }}
       />
-    </Center>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 40,
+    paddingTop: 120,
+    paddingBottom: 80,
+  },
+});
