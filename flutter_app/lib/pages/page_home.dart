@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/page_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
 class PageHome extends StatelessWidget {
@@ -6,11 +7,9 @@ class PageHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("welcome"),
-      ),
-      body: Center(
+    return PageWrapper(
+      title: "Welcome page",
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
