@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/page_home.dart';
 import 'package:flutter_app/pages/page_login.dart';
+import 'package:flutter_app/theme.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
@@ -14,9 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: CustomTheme.light,
+      darkTheme: CustomTheme.dark,
+      themeMode: ThemeMode.light,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
     );

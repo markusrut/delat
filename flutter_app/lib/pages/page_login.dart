@@ -9,11 +9,14 @@ class PageLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageWrapper(
-      title: "Login",
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              'Login',
+              style: Theme.of(context).textTheme.headline1,
+            ),
             const TextField(
               decoration: InputDecoration(
                 labelText: 'Username',
